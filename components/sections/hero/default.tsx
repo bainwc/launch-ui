@@ -1,14 +1,11 @@
-import { siteConfig } from "@/config/site";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-
 import { Button, type ButtonProps } from "../../ui/button";
 import { Badge } from "../../ui/badge";
 import { ArrowRightIcon } from "lucide-react";
 import { Section } from "../../ui/section";
 import { Mockup, MockupFrame } from "../../ui/mockup";
 import Glow from "../../ui/glow";
-import Github from "../../logos/github";
 import Screenshot from "../../ui/screenshot";
 
 interface HeroButtonProps {
@@ -29,40 +26,36 @@ interface HeroProps {
 }
 
 export default function Hero({
-  title = "Give your big idea the design it deserves",
-  description = "Professionally designed blocks and templates built with React, Shadcn/ui and Tailwind that will help your product stand out.",
+  title = "Built for your mind's real moments.",
+  description = "No pressure, just start where you are.",
   mockup = (
     <Screenshot
-      srcLight="/app-light.png"
-      srcDark="/app-dark.png"
-      alt="Launch UI app screenshot"
-      width={1248}
-      height={765}
+      srcLight="/app_insights.png"
+      srcDark="/app_homepage.png"
+      alt="homepage_preview"
+      width={722}
+      height={345}
       className="w-full"
     />
   ),
   badge = (
     <Badge variant="outline" className="animate-appear">
-      <span className="text-muted-foreground">
-        New version of Launch UI is out!
-      </span>
-      <a href={siteConfig.getStartedUrl} className="flex items-center gap-1">
-        Get started
-        <ArrowRightIcon className="size-3" />
-      </a>
+      <span className="text-muted-foreground">Mental Health</span>
+      <span className="mx-2">•</span>
+      <span className="text-muted-foreground">Private by Design</span>
     </Badge>
   ),
   buttons = [
     {
-      href: siteConfig.getStartedUrl,
-      text: "Get Started",
+      href: "/start",
+      text: "Start Free Trial",
       variant: "default",
     },
     {
-      href: siteConfig.links.github,
-      text: "Github",
-      variant: "glow",
-      icon: <Github className="mr-2 size-4" />,
+      href: "/features/soc",
+      text: "Learn More",
+      variant: "outline",
+      iconRight: <ArrowRightIcon className="ml-2 size-4" />,
     },
   ],
   className,
@@ -115,9 +108,10 @@ export default function Hero({
                 </Mockup>
               </MockupFrame>
               <Glow
-                variant="top"
-                className="animate-appear-zoom opacity-0 delay-1000"
-              />
+  variant="top"
+  className="animate-appear-zoom opacity-0 delay-1000 from-[#304269]/30"
+/>
+
             </div>
           )}
         </div>
