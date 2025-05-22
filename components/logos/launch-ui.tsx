@@ -1,19 +1,21 @@
-const LaunchUI = (props: React.SVGProps<SVGSVGElement>) => (
+const TakomiLogo = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
-    width={24}
-    height={24}
-    viewBox="0 0 24 24"
-    fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 338 338"
+    fill="none"
+    width="24"
+    height="24"
     {...props}
   >
     <path
-      d="M10.5 12.75H3L6 9.75H9L15.75 3H20.25L10.5 12.75Z"
+      d="M168.69 0C75.459 0 0 75.459 0 168.69c0 93.23 75.459 168.69 168.69 168.69 93.23 0 168.69-75.46 168.69-168.69C337.38 75.459 261.92 0 168.69 0Zm0 308.12c-76.879 0-139.43-62.55-139.43-139.43 0-76.879 62.551-139.43 139.43-139.43 76.88 0 139.43 62.551 139.43 139.43 0 76.88-62.55 139.43-139.43 139.43Z"
       fill="currentColor"
     />
-    <path d="M11.25 15V13.5L21 3.75V5.25L11.25 15Z" fill="currentColor" />
-    <path d="M11.25 18V16.5L21 6.75V8.25L11.25 18Z" fill="currentColor" />
-    <path d="M11.25 21V19.5L15 15.75V17.25L11.25 21Z" fill="currentColor" />
+    <path
+      d="M233.63 141.67H112.61a3.23 3.23 0 0 0-3.23 3.23v48.98a3.23 3.23 0 0 0 3.23 3.23h121.02a3.23 3.23 0 0 0 3.23-3.23v-48.98a3.23 3.23 0 0 0-3.23-3.23Zm-3.23 48.98H115.84v-42.52h114.56v42.52Z"
+      fill="currentColor"
+    />
   </svg>
 );
-export default LaunchUI;
+
+export default TakomiLogo;

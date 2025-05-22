@@ -16,7 +16,7 @@ interface FAQItemProps {
   value?: string;
 }
 
-interface FAQProps {
+interface FAQProps extends React.HTMLAttributes<HTMLElement> {
   title?: string;
   items?: FAQItemProps[] | false;
   className?: string;
@@ -85,7 +85,7 @@ export default function FAQ({
       ),
     },
     {
-      question: 'Why exactly does it mean that "The code is yours"?',
+      question: 'What exactly does it mean that "The code is yours"?',
       answer: (
         <>
           <p className="text-muted-foreground mb-4 max-w-[580px]">
@@ -128,7 +128,7 @@ export default function FAQ({
       answer: (
         <>
           <p className="text-muted-foreground mb-4 max-w-[580px]">
-            Actually, yes! I&apos;m always acively looking for beta testers of
+            Actually, yes! I&apos;m always actively looking for beta testers of
             new features. If you are interested in exchanging feedback for a
             discount, please contact me via{" "}
             <a
@@ -144,9 +144,10 @@ export default function FAQ({
     },
   ],
   className,
+  ...props
 }: FAQProps) {
   return (
-    <Section className={className}>
+    <Section id={props.id} {...props} className={className}>
       <div className="max-w-container mx-auto flex flex-col items-center gap-8">
         <h2 className="text-center text-3xl font-semibold sm:text-5xl">
           {title}

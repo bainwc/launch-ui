@@ -1,4 +1,6 @@
-import { ReactNode } from "react";
+"use client";
+
+import { ReactNode, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button, type ButtonProps } from "../../ui/button";
 import { Badge } from "../../ui/badge";
@@ -16,7 +18,7 @@ interface HeroButtonProps {
   iconRight?: ReactNode;
 }
 
-interface HeroProps {
+interface HeroProps extends React.HTMLAttributes<HTMLElement> {
   title?: string;
   description?: string;
   mockup?: ReactNode | false;
@@ -28,18 +30,9 @@ interface HeroProps {
 export default function Hero({
   title = "Built for your mind's real moments.",
   description = "No pressure, just start where you are.",
-  mockup = (
-    <Screenshot
-      srcLight="/app_insights.png"
-      srcDark="/app_homepage.png"
-      alt="homepage_preview"
-      width={722}
-      height={345}
-      className="w-full"
-    />
-  ),
+  mockup = false,
   badge = (
-    <Badge variant="outline" className="animate-appear">
+    <Badge variant="outline">
       <span className="text-muted-foreground">Mental Health</span>
       <span className="mx-2">•</span>
       <span className="text-muted-foreground">Private by Design</span>
@@ -59,25 +52,58 @@ export default function Hero({
     },
   ],
   className,
+  ...props
 }: HeroProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <Section
+      id={props.id}
+      {...props}
       className={cn(
         "fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0",
         className,
       )}
     >
-      <div className="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
-        <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
+      <div className="relative">
+        <Glow
+          variant="top"
+          className={cn(
+            "absolute inset-0 -z-10 opacity-0 delay-1000 from-[#304269]/30",
+            mounted && "animate-appear-zoom"
+          )}
+        />
+      </div>
+      <div className="max-w-container mx-auto flex flex-col gap-6 pt-0 sm:pt-1 sm:gap-8">
+        <div className="flex flex-col items-center gap-2 text-center sm:gap-6">
           {badge !== false && badge}
-          <h1 className="animate-appear from-foreground to-foreground dark:to-muted-foreground relative z-10 inline-block bg-linear-to-r bg-clip-text text-4xl leading-tight font-semibold text-balance text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight">
+          <h1
+            className={cn(
+              "from-foreground to-foreground dark:to-muted-foreground relative z-10 inline-block bg-linear-to-r bg-clip-text text-4xl leading-tight font-semibold text-balance text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight",
+              mounted && "animate-appear"
+            )}
+          >
             {title}
           </h1>
-          <p className="text-md animate-appear text-muted-foreground relative z-10 max-w-[740px] font-medium text-balance opacity-0 delay-100 sm:text-xl">
+          <p
+            className={cn(
+              "text-md text-muted-foreground relative z-10 max-w-[740px] font-medium text-balance opacity-0 delay-100 sm:text-xl",
+              mounted && "animate-appear"
+            )}
+          >
             {description}
           </p>
           {buttons !== false && buttons.length > 0 && (
-            <div className="animate-appear relative z-10 flex justify-center gap-4 opacity-0 delay-300">
+            <div
+              className={cn(
+                "relative z-10 flex justify-center gap-4 opacity-0 delay-300 mb-16",
+                mounted && "animate-appear"
+              )}
+            >
               {buttons.map((button, index) => (
                 <Button
                   key={index}
@@ -97,7 +123,10 @@ export default function Hero({
           {mockup !== false && (
             <div className="relative w-full pt-12">
               <MockupFrame
-                className="animate-appear opacity-0 delay-700"
+                className={cn(
+                  "opacity-0 delay-700",
+                  mounted && "animate-appear"
+                )}
                 size="small"
               >
                 <Mockup
@@ -107,11 +136,6 @@ export default function Hero({
                   {mockup}
                 </Mockup>
               </MockupFrame>
-              <Glow
-  variant="top"
-  className="animate-appear-zoom opacity-0 delay-1000 from-[#304269]/30"
-/>
-
             </div>
           )}
         </div>

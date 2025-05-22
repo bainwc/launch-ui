@@ -11,7 +11,7 @@ import {
   NavbarRight,
 } from "../../ui/navbar";
 import { Sheet, SheetContent, SheetTrigger } from "../../ui/sheet";
-import LaunchUI from "../../logos/launch-ui";
+import TakomiLogo from "@/components/logos/TakomiLogo";
 
 interface NavbarLink {
   text: string;
@@ -39,13 +39,15 @@ interface NavbarProps {
 }
 
 export default function Navbar({
-  logo = <LaunchUI />,
-  name = "Launch UI",
+  logo = <TakomiLogo className="text-[#304269] w-10 h-10" />, // Navy,
+  name = "takomi",
   homeUrl = siteConfig.url,
-  mobileLinks = [
-    { text: "Getting Started", href: siteConfig.url },
-    { text: "Components", href: siteConfig.url },
-    { text: "Documentation", href: siteConfig.url },
+  mobileLinks=[
+   // { text: "Overview", href: "#hero" },
+    { text: "How It Works", href: "#items" },
+    { text: "Pricing", href: "#pricing" },
+    { text: "FAQ", href: "#faq" },
+    { text: "Contact", href: "#contact" },
   ],
   actions = [
     { text: "Sign in", href: siteConfig.url, isButton: false },
@@ -61,7 +63,7 @@ export default function Navbar({
   className,
 }: NavbarProps) {
   return (
-    <header className={cn("sticky top-0 z-50 -mb-4 px-4 pb-4", className)}>
+    <header className={cn("sticky top-0 z-50 px-4 pb-0", className)}>
       <div className="fade-bottom bg-background/15 absolute left-0 h-24 w-full backdrop-blur-lg"></div>
       <div className="max-w-container relative mx-auto">
         <NavbarComponent>
@@ -73,7 +75,19 @@ export default function Navbar({
               {logo}
               {name}
             </a>
-            {showNavigation && (customNavigation || <Navigation />)}
+            {showNavigation && (customNavigation || (
+  <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+    {mobileLinks.map((link, index) => (
+      <a
+        key={index}
+        href={link.href}
+        className="text-muted-foreground hover:text-foreground transition-colors"
+      >
+        {link.text}
+      </a>
+    ))}
+  </nav>
+))}
           </NavbarLeft>
           <NavbarRight>
             {actions.map((action, index) =>
@@ -111,7 +125,7 @@ export default function Navbar({
                 </Button>
               </SheetTrigger>
               <SheetContent side="right">
-                <nav className="grid gap-6 text-lg font-medium">
+                <nav className="grid gap-4 text-base font-medium">
                   <a
                     href={homeUrl}
                     className="flex items-center gap-2 text-xl font-bold"

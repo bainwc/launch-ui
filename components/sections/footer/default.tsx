@@ -21,7 +21,7 @@ interface FooterColumnProps {
   links: FooterLink[];
 }
 
-interface FooterProps {
+interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   logo?: ReactNode;
   name?: string;
   columns?: FooterColumnProps[];
@@ -66,9 +66,10 @@ export default function FooterSection({
   ],
   showModeToggle = true,
   className,
+  ...props
 }: FooterProps) {
   return (
-    <footer className={cn("bg-background w-full px-4", className)}>
+    <footer id={props.id} {...props} className={cn("bg-background w-full px-4", className)}>
       <div className="max-w-container mx-auto">
         <Footer>
           <FooterContent>
